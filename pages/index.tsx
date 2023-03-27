@@ -29,6 +29,7 @@ import Head from 'next/head';
 import { useEffect, useRef, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { alchemy } from '../script';
+import { useAccount, useConnect, useDisconnect } from 'wagmi';
 
 interface HomeProps {
   serverSideApiKeyIsSet: boolean;
@@ -43,6 +44,8 @@ const Home: React.FC<HomeProps> = ({ serverSideApiKeyIsSet }) => {
   const [loading, setLoading] = useState<boolean>(false);
   const [lightMode, setLightMode] = useState<'dark' | 'light'>('dark');
   const [messageIsStreaming, setMessageIsStreaming] = useState<boolean>(false);
+
+  const { address, isConnected } = useAccount();
 
   const [walletData, setWalletData] = useState<any>(null);
 
@@ -68,7 +71,11 @@ const Home: React.FC<HomeProps> = ({ serverSideApiKeyIsSet }) => {
 
   // FETCH RESPONSE ----------------------------------------------
 
-  const handleSend = async (message: Message, deleteCount = 0) => {
+  const handleSend = async (
+    message: Message,
+    address: any,
+    deleteCount = 0,
+  ) => {
     if (selectedConversation) {
       let updatedConversation: Conversation;
 
@@ -94,8 +101,7 @@ const Home: React.FC<HomeProps> = ({ serverSideApiKeyIsSet }) => {
       setMessageIsStreaming(true);
 
       console.log('prompt: ', updatedConversation.prompt);
-
-      const address = '0xd8da6bf26964af9d7eed9e03e53415d37aa96045';
+      console.log('ADDRESS', address);
 
       let balances = await alchemy.core.getTokenBalances(address);
 
@@ -139,7 +145,7 @@ const Home: React.FC<HomeProps> = ({ serverSideApiKeyIsSet }) => {
       //@ts-ignore
       const transactionData = await alchemy.core.getAssetTransfers({
         fromBlock: '0x0',
-        fromAddress: '0x5c43B1eD97e52d009611D89b74fA829FE4ac56b1',
+        fromAddress: address,
         category: ['external', 'internal', 'erc20', 'erc721', 'erc1155'],
       });
 
@@ -599,9 +605,12 @@ const Home: React.FC<HomeProps> = ({ serverSideApiKeyIsSet }) => {
   // EFFECTS  --------------------------------------------
 
   useEffect(() => {
-    if (currentMessage) {
-      handleSend(currentMessage);
+    console.log(address);
+    if (currentMessage && address) {
+      handleSend(currentMessage, address);
       setCurrentMessage(undefined);
+    } else {
+      console.log('no Address', address);
     }
   }, [currentMessage]);
 
@@ -618,18 +627,7 @@ const Home: React.FC<HomeProps> = ({ serverSideApiKeyIsSet }) => {
   }, [apiKey]);
 
   //@ts-ignore
-  useEffect(() => {
-    // alchemy.core.getBlockNumber().then(console.log);
-
-    // Access Alchemy Enhanced API requests
-
-    alchemy.core
-      .getTokenBalances('0x95222290DD7278Aa3Ddd389Cc1E1d165CC4BAfe5')
-      .then(console.log);
-
-    // Access the Alchemy NFT API
-    // alchemy.nft.getNftsForOwner('vitalik.eth').then(console.log);
-  }, [alchemy]);
+  useEffect(() => {}, [alchemy]);
 
   // ON LOAD --------------------------------------------
 
@@ -781,6 +779,7 @@ const Home: React.FC<HomeProps> = ({ serverSideApiKeyIsSet }) => {
                 onUpdateConversation={handleUpdateConversation}
                 onEditMessage={handleEditMessage}
                 stopConversationRef={stopConversationRef}
+                address={address}
               />
             </div>
 

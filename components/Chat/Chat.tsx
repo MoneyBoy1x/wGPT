@@ -32,13 +32,14 @@ interface Props {
   modelError: ErrorMessage | null;
   loading: boolean;
   prompts: Prompt[];
-  onSend: (message: Message, deleteCount?: number) => void;
+  onSend: (message: Message, address: any, deleteCount?: number) => void;
   onUpdateConversation: (
     conversation: Conversation,
     data: KeyValuePair,
   ) => void;
   onEditMessage: (message: Message, messageIndex: number) => void;
   stopConversationRef: MutableRefObject<boolean>;
+  address: any;
 }
 
 export const Chat: FC<Props> = memo(
@@ -55,6 +56,7 @@ export const Chat: FC<Props> = memo(
     onUpdateConversation,
     onEditMessage,
     stopConversationRef,
+    address,
   }) => {
     const { t } = useTranslation('chat');
     const [currentMessage, setCurrentMessage] = useState<Message>();
@@ -274,11 +276,11 @@ export const Chat: FC<Props> = memo(
               prompts={prompts}
               onSend={(message) => {
                 setCurrentMessage(message);
-                onSend(message);
+                onSend(message, address);
               }}
               onRegenerate={() => {
                 if (currentMessage) {
-                  onSend(currentMessage, 2);
+                  onSend(currentMessage, address, 2);
                 }
               }}
             />
