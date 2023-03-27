@@ -637,7 +637,7 @@ const Home: React.FC<HomeProps> = ({ serverSideApiKeyIsSet }) => {
           </div>
 
           <div className="flex h-full w-full pt-[48px] sm:pt-0">
-            {showSidebar ? (
+            {true ? (
               <div>
                 <Chatbar
                   loading={messageIsStreaming}
@@ -661,10 +661,10 @@ const Home: React.FC<HomeProps> = ({ serverSideApiKeyIsSet }) => {
                   onImportConversations={handleImportConversations}
                 />
 
-                <IconArrowBarLeft
+                {/* <IconArrowBarLeft
                   className="fixed top-5 left-[270px] z-50 h-7 w-7 cursor-pointer hover:text-gray-400 dark:text-white dark:hover:text-gray-300 sm:top-0.5 sm:left-[270px] sm:h-8 sm:w-8 sm:text-neutral-700"
                   onClick={handleToggleChatbar}
-                />
+                /> */}
 
                 <div
                   onClick={handleToggleChatbar}
@@ -672,10 +672,12 @@ const Home: React.FC<HomeProps> = ({ serverSideApiKeyIsSet }) => {
                 ></div>
               </div>
             ) : (
-              <IconArrowBarRight
-                className="fixed top-2.5 left-4 z-50 h-7 w-7 cursor-pointer text-white hover:text-gray-400 dark:text-white dark:hover:text-gray-300 sm:top-0.5 sm:left-4 sm:h-8 sm:w-8 sm:text-neutral-700"
-                onClick={handleToggleChatbar}
-              />
+              <div>
+                {/* <IconArrowBarRight
+                  className="fixed top-2.5 left-4 z-50 h-7 w-7 cursor-pointer text-white hover:text-gray-400 dark:text-white dark:hover:text-gray-300 sm:top-0.5 sm:left-4 sm:h-8 sm:w-8 sm:text-neutral-700"
+                  onClick={handleToggleChatbar}
+                /> */}
+              </div>
             )}
 
             <div className="flex flex-1">
@@ -708,20 +710,22 @@ const Home: React.FC<HomeProps> = ({ serverSideApiKeyIsSet }) => {
                   onDeleteFolder={handleDeleteFolder}
                   onUpdateFolder={handleUpdateFolder}
                 />
-                <IconArrowBarRight
+                {/* <IconArrowBarRight
                   className="fixed top-5 right-[270px] z-50 h-7 w-7 cursor-pointer hover:text-gray-400 dark:text-white dark:hover:text-gray-300 sm:top-0.5 sm:right-[270px] sm:h-8 sm:w-8 sm:text-neutral-700"
                   onClick={handleTogglePromptbar}
-                />
+                /> */}
                 <div
                   onClick={handleTogglePromptbar}
                   className="absolute top-0 left-0 z-10 h-full w-full bg-black opacity-70 sm:hidden"
                 ></div>
               </div>
             ) : (
-              <IconArrowBarLeft
+              <div>
+                {/* <IconArrowBarLeft
                 className="fixed top-2.5 right-4 z-50 h-7 w-7 cursor-pointer text-white hover:text-gray-400 dark:text-white dark:hover:text-gray-300 sm:top-0.5 sm:right-4 sm:h-8 sm:w-8 sm:text-neutral-700"
                 onClick={handleTogglePromptbar}
-              />
+              /> */}
+              </div>
             )}
           </div>
         </main>
