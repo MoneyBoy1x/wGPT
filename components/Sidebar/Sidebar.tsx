@@ -115,7 +115,9 @@ export const Sidebar: FC<Props> = ({
           const searchable =
             conversation.name.toLocaleLowerCase() +
             ' ' +
-            conversation.messages.map((message) => message.content).join(' ');
+            conversation.messages
+              .map((message: { content: any }) => message.content)
+              .join(' ');
           return searchable.toLowerCase().includes(searchTerm.toLowerCase());
         }),
       );
@@ -170,7 +172,11 @@ export const Sidebar: FC<Props> = ({
       </header>
 
       {conversations.length > 1 && (
-        <Search searchTerm={searchTerm} onSearch={setSearchTerm} />
+        <Search
+          searchTerm={searchTerm}
+          onSearch={setSearchTerm}
+          placeholder={''}
+        />
       )}
 
       <div className="flex-grow overflow-auto">
