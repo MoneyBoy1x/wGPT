@@ -126,6 +126,8 @@ export const Chatbar: FC<Props> = ({
     }
   }, [searchTerm, conversations]);
 
+  console.log(address);
+
   return (
     <div
       className={`fixed top-0 bottom-0 z-50 flex h-full w-[260px] flex-none flex-col space-y-2 bg-[#202123] p-2 transition-all sm:relative sm:top-0`}

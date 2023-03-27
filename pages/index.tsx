@@ -123,7 +123,9 @@ const Home: React.FC<HomeProps> = ({ serverSideApiKeyIsSet }) => {
         );
 
         // Compute token balance in human-readable format
+        //@ts-ignore
         balance = balance / Math.pow(10, metadata.decimals);
+        //@ts-ignore
         balance = balance.toFixed(2);
 
         // Print name, balance, and symbol of token
@@ -702,7 +704,7 @@ const Home: React.FC<HomeProps> = ({ serverSideApiKeyIsSet }) => {
   return (
     <>
       <Head>
-        <title>Chatbot UI</title>
+        <title>WalletGPT</title>
         <meta name="description" content="ChatGPT but better." />
         <meta
           name="viewport"
