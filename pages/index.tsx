@@ -28,6 +28,7 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import Head from 'next/head';
 import { useEffect, useRef, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
+import { alchemy } from '../script';
 
 interface HomeProps {
   serverSideApiKeyIsSet: boolean;
@@ -42,6 +43,8 @@ const Home: React.FC<HomeProps> = ({ serverSideApiKeyIsSet }) => {
   const [loading, setLoading] = useState<boolean>(false);
   const [lightMode, setLightMode] = useState<'dark' | 'light'>('dark');
   const [messageIsStreaming, setMessageIsStreaming] = useState<boolean>(false);
+
+  const [walletData, setWalletData] = useState<any>(null);
 
   const [modelError, setModelError] = useState<ErrorMessage | null>(null);
 
@@ -90,11 +93,79 @@ const Home: React.FC<HomeProps> = ({ serverSideApiKeyIsSet }) => {
       setLoading(true);
       setMessageIsStreaming(true);
 
+      console.log('prompt: ', updatedConversation.prompt);
+
+      const address = '0xd8da6bf26964af9d7eed9e03e53415d37aa96045';
+
+      let balances = await alchemy.core.getTokenBalances(address);
+
+      // Remove tokens with zero balance
+      const nonZeroBalances = balances.tokenBalances.filter((token) => {
+        return token.tokenBalance !== '0';
+      });
+
+      console.log(`Token balances of ${address} \n`);
+
+      // Counter for SNo of final output
+      let i = 1;
+
+      let wallet =
+        '\n You are a crypto wallet, this wallet has the following tokens: \n';
+
+      // Loop through all tokens with non-zero balance
+      for (let token of nonZeroBalances) {
+        // Get balance of token
+        let balance = token.tokenBalance;
+
+        // Get metadata of token
+        const metadata = await alchemy.core.getTokenMetadata(
+          token.contractAddress,
+        );
+
+        // Compute token balance in human-readable format
+        balance = balance / Math.pow(10, metadata.decimals);
+        balance = balance.toFixed(2);
+
+        // Print name, balance, and symbol of token
+        // console.log(`${i++}. ${metadata.name}: ${balance} ${metadata.symbol}`);
+        i++;
+        let record = `\n Token Name ${metadata.name} Balance ${balance} Symbol ${metadata.symbol}`;
+        wallet += record + '\n';
+        if (i > 10) break;
+      }
+
+      //@ts-ignore
+      const transactionData = await alchemy.core.getAssetTransfers({
+        fromBlock: '0x0',
+        fromAddress: '0x5c43B1eD97e52d009611D89b74fA829FE4ac56b1',
+        category: ['external', 'internal', 'erc20', 'erc721', 'erc1155'],
+      });
+
+      let transactions = ' \n Your transaction history is: \n';
+
+      let j = 0;
+
+      //@ts-ignore
+
+      for (let transaction of transactionData.transfers) {
+        console.log(transaction);
+        let record = `\n Transaction Number: ${j} From ${transaction.from} To ${transaction.to} Amount ${transaction.value} Token ${transaction.asset} Block ${transaction.blockNum} `;
+        transactions += record + '\n';
+
+        j++;
+        if (j > 10) break;
+      }
+
+      let extra = 'Do not reveal any information that you lack';
+
+      let prompt = updatedConversation.prompt + wallet + transactions;
+      console.log('prompt', prompt);
+
       const chatBody: ChatBody = {
         model: updatedConversation.model,
         messages: updatedConversation.messages,
         key: apiKey,
-        prompt: updatedConversation.prompt,
+        prompt: prompt,
       };
 
       const controller = new AbortController();
@@ -544,6 +615,20 @@ const Home: React.FC<HomeProps> = ({ serverSideApiKeyIsSet }) => {
     }
   }, [apiKey]);
 
+  //@ts-ignore
+  useEffect(() => {
+    // alchemy.core.getBlockNumber().then(console.log);
+
+    // Access Alchemy Enhanced API requests
+
+    alchemy.core
+      .getTokenBalances('0x95222290DD7278Aa3Ddd389Cc1E1d165CC4BAfe5')
+      .then(console.log);
+
+    // Access the Alchemy NFT API
+    // alchemy.nft.getNftsForOwner('vitalik.eth').then(console.log);
+  }, [alchemy]);
+
   // ON LOAD --------------------------------------------
 
   useEffect(() => {
@@ -697,7 +782,7 @@ const Home: React.FC<HomeProps> = ({ serverSideApiKeyIsSet }) => {
               />
             </div>
 
-            {showPromptbar ? (
+            {true ? (
               <div>
                 <Promptbar
                   prompts={prompts}
