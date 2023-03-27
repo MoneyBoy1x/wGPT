@@ -28,7 +28,8 @@
     "rehype-mathjax": "^4.0.2",
     "remark-gfm": "^3.0.1",
     "remark-math": "^5.1.1",
-    "wagmi": "^0.12.6"
+    "wagmi": "^0.12.6",
+    "uuid": "^9.0.0"
   },
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.9",
@@ -36,6 +37,7 @@
     "@types/react": "18.0.28",
     "@types/react-dom": "18.0.11",
     "@types/react-syntax-highlighter": "^15.5.6",
+    "@types/uuid": "^9.0.1",
     "autoprefixer": "^10.4.14",
     "eslint": "8.36.0",
     "eslint-config-next": "13.2.4",
