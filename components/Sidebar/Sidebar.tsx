@@ -11,6 +11,8 @@ import { Conversations } from './Conversations';
 import { Folders } from './Folders';
 import { Search } from './Search';
 import { SidebarSettings } from './SidebarSettings';
+import { useAccount, useConnect, useDisconnect } from 'wagmi';
+import { InjectedConnector } from 'wagmi/connectors/injected';
 
 interface Props {
   loading: boolean;
@@ -66,6 +68,12 @@ export const Sidebar: FC<Props> = ({
   const [filteredConversations, setFilteredConversations] =
     useState<Conversation[]>(conversations);
 
+  const { address, isConnected } = useAccount();
+  const { connect } = useConnect({
+    connector: new InjectedConnector(),
+  });
+  const { disconnect } = useDisconnect();
+
   const handleUpdateConversation = (
     conversation: Conversation,
     data: KeyValuePair,
@@ -120,9 +128,26 @@ export const Sidebar: FC<Props> = ({
     <aside
       className={`fixed top-0 bottom-0 z-50 flex h-full w-[260px] flex-none flex-col space-y-2 bg-[#202123] p-2 transition-all sm:relative sm:top-0`}
     >
+      <div className="my-2 flex flex-col">
+        {address ? (
+          <button
+            className="rounded-md bg-indigo-600 py-3 px-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+            onClick={() => disconnect()}
+          >
+            Disconnect Wallet
+          </button>
+        ) : (
+          <button
+            className="rounded-md bg-indigo-600 py-3 px-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+            onClick={() => connect()}
+          >
+            Connect Wallet
+          </button>
+        )}
+      </div>
       <header className="flex items-center">
         <button
-          className="flex w-[190px] flex-shrink-0 cursor-pointer items-center gap-3 rounded-md border border-white/20 p-3 text-[12.5px] leading-3 text-white transition-colors duration-200 select-none hover:bg-gray-500/10"
+          className="flex w-[190px] flex-shrink-0 cursor-pointer select-none items-center gap-3 rounded-md border border-white/20 p-3 text-[12.5px] leading-3 text-white transition-colors duration-200 hover:bg-gray-500/10"
           onClick={() => {
             onNewConversation();
             setSearchTerm('');
@@ -131,14 +156,12 @@ export const Sidebar: FC<Props> = ({
           <IconPlus size={18} />
           {t('New chat')}
         </button>
-
         <button
           className="ml-2 flex flex-shrink-0 cursor-pointer items-center gap-3 rounded-md border border-white/20 p-3 text-[12.5px] leading-3 text-white transition-colors duration-200 hover:bg-gray-500/10"
           onClick={() => onCreateFolder(t('New folder'))}
         >
           <IconFolderPlus size={18} />
         </button>
-
         <IconArrowBarLeft
           className="ml-1 hidden cursor-pointer p-1 text-neutral-300 hover:text-neutral-400 sm:flex"
           size={32}
@@ -192,9 +215,11 @@ export const Sidebar: FC<Props> = ({
             />
           </div>
         ) : (
-          <div className="mt-8 text-white text-center opacity-50 select-none">
-            <IconMessagesOff className='mx-auto mb-3'/>
-            <span className='text-[12.5px] leading-3'>{t('No conversations.')}</span>
+          <div className="mt-8 select-none text-center text-white opacity-50">
+            <IconMessagesOff className="mx-auto mb-3" />
+            <span className="text-[12.5px] leading-3">
+              {t('No conversations.')}
+            </span>
           </div>
         )}
       </div>

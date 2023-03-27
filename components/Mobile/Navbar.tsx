@@ -1,6 +1,8 @@
 import { Conversation } from '@/types';
 import { IconPlus } from '@tabler/icons-react';
 import { FC } from 'react';
+import { useAccount, useConnect, useDisconnect } from 'wagmi';
+import { InjectedConnector } from 'wagmi/connectors/injected';
 
 interface Props {
   selectedConversation: Conversation;
@@ -11,6 +13,11 @@ export const Navbar: FC<Props> = ({
   selectedConversation,
   onNewConversation,
 }) => {
+  const { address } = useAccount();
+  const { connect } = useConnect({
+    connector: new InjectedConnector(),
+  });
+  const { disconnect } = useDisconnect();
   return (
     <nav className="flex w-full justify-between bg-[#202123] py-3 px-4">
       <div className="mr-4"></div>

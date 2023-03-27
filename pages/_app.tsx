@@ -5,10 +5,20 @@ import { Inter } from 'next/font/google';
 
 const inter = Inter({ subsets: ['latin'] });
 
+import { WagmiConfig, createClient } from 'wagmi';
+import { getDefaultProvider } from 'ethers';
+
+const client = createClient({
+  autoConnect: true,
+  provider: getDefaultProvider(),
+});
+
 function App({ Component, pageProps }: AppProps<{}>) {
   return (
     <main className={inter.className}>
-      <Component {...pageProps} />
+      <WagmiConfig client={client}>
+        <Component {...pageProps} />
+      </WagmiConfig>
     </main>
   );
 }
