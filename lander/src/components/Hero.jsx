@@ -13,7 +13,7 @@ export function Hero() {
   return (
     <Container className="pt-20 pb-16 text-center lg:pt-32">
       <h1 className="mx-auto max-w-4xl font-display text-5xl font-medium tracking-tight text-white sm:text-7xl">
-        Give Your Crypto AI Super Powers{' '}
+        Command Your Crypto with AI
       </h1>
       <p className="mx-auto mt-6 max-w-2xl text-lg tracking-tight text-slate-300">
         Make better trading decisions with the help of chatGPT.

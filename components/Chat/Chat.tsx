@@ -137,7 +137,7 @@ export const Chat: FC<Props> = memo(
     }, [messagesEndRef]);
 
     return (
-      <div className="overflow-none relative flex-1 bg-white dark:bg-[#343541]">
+      <div className="overflow-none relative flex-1 bg-white dark:bg-[#030A13]">
         {!(apiKey || serverSideApiKeyIsSet) ? (
           <div className="mx-auto flex h-full w-[300px] flex-col justify-center space-y-6 sm:w-[500px]">
             <div className="mx-auto mb-5 text-gray-800 dark:text-gray-100">
@@ -172,7 +172,7 @@ export const Chat: FC<Props> = memo(
         ) : (
           <>
             <div
-              className="max-h-full overflow-x-hidden"
+              className="max-h-full overflow-x-hidden "
               ref={chatContainerRef}
             >
               {conversation.messages.length === 0 ? (
@@ -217,7 +217,7 @@ export const Chat: FC<Props> = memo(
                 </>
               ) : (
                 <>
-                  <div className="flex justify-center border border-b-neutral-300 bg-neutral-100 py-2 text-sm text-neutral-500 dark:border-none dark:bg-[#444654] dark:text-neutral-200">
+                  <div className="flex justify-center border border-b-neutral-300 bg-neutral-100 py-2 text-sm text-neutral-500 dark:border-zinc-800 dark:bg-[#030A13] dark:text-neutral-200">
                     {t('Model')}: {conversation.model.name}
                     <IconSettings
                       className="ml-2 cursor-pointer hover:opacity-50"
@@ -259,7 +259,7 @@ export const Chat: FC<Props> = memo(
                   {loading && <ChatLoader />}
 
                   <div
-                    className="h-[162px] bg-white dark:bg-[#343541]"
+                    className="h-[162px] bg-white dark:bg-[#030A13]"
                     ref={messagesEndRef}
                   />
                 </>

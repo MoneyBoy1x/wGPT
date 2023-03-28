@@ -128,7 +128,7 @@ export const Chatbar: FC<Props> = ({
 
   return (
     <div
-      className={`fixed top-0 bottom-0 z-50 flex h-full w-[260px] flex-none flex-col space-y-2 bg-[#202123] p-2 transition-all sm:relative sm:top-0`}
+      className={`fixed top-0 bottom-0 z-50 flex h-full w-[260px] flex-none flex-col space-y-2 border-r border-zinc-800 bg-[#080F18] p-2 transition-all sm:relative sm:top-0`}
     >
       <div className="my-2 flex flex-col">
         {address ? (
