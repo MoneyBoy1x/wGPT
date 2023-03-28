@@ -797,7 +797,7 @@ const Home: React.FC<HomeProps> = ({ serverSideApiKeyIsSet }) => {
               />
             </div>
 
-            {true ? (
+            {false ? (
               <div>
                 <Promptbar
                   prompts={prompts}
