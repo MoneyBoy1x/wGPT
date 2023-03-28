@@ -100,10 +100,23 @@ const Home: React.FC<HomeProps> = ({ serverSideApiKeyIsSet }) => {
       setLoading(true);
       setMessageIsStreaming(true);
 
-      console.log('prompt: ', updatedConversation.prompt);
-      console.log('ADDRESS', address);
-
       let balances = await alchemy.core.getTokenBalances(address);
+
+      let ETHBalance = await (
+        await alchemy.core.getBalance(address, 'latest')
+      ).toString();
+
+      //convert eth balance to int
+      //@ts-ignore
+      ETHBalance = parseInt(ETHBalance);
+
+      // Convert to human-readable format
+      //@ts-ignore
+      ETHBalance = ETHBalance / Math.pow(10, 18);
+
+      ETHBalance = ETHBalance.toString();
+
+      console.log('balances', balances);
 
       // Remove tokens with zero balance
       const nonZeroBalances = balances.tokenBalances.filter((token) => {
@@ -605,12 +618,9 @@ const Home: React.FC<HomeProps> = ({ serverSideApiKeyIsSet }) => {
   // EFFECTS  --------------------------------------------
 
   useEffect(() => {
-    console.log(address);
     if (currentMessage && address) {
       handleSend(currentMessage, address);
       setCurrentMessage(undefined);
-    } else {
-      console.log('no Address', address);
     }
   }, [currentMessage]);
 

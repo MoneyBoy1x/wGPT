@@ -6,6 +6,3 @@ const settings = {
 };
 
 export const alchemy = new Alchemy(settings);
-
-// get the latest block
-const latestBlock = alchemy.core.getBlock('latest').then(console.log);
