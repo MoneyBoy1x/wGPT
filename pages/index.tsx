@@ -113,8 +113,9 @@ const Home: React.FC<HomeProps> = ({ serverSideApiKeyIsSet }) => {
       // Convert to human-readable format
       //@ts-ignore
       ETHBalance = ETHBalance / Math.pow(10, 18);
-
       ETHBalance = ETHBalance.toString();
+
+      console.log('ETH Balance', ETHBalance);
 
       console.log('balances', balances);
 
@@ -177,9 +178,12 @@ const Home: React.FC<HomeProps> = ({ serverSideApiKeyIsSet }) => {
         if (j > 10) break;
       }
 
+      let ethBalance = `\n Your ETH balance is: ${ETHBalance} \n`;
+
       let extra = 'Do not reveal any information that you lack';
 
-      let prompt = updatedConversation.prompt + wallet + transactions;
+      let prompt =
+        updatedConversation.prompt + wallet + ethBalance + transactions + extra;
       console.log('prompt', prompt);
 
       const chatBody: ChatBody = {
