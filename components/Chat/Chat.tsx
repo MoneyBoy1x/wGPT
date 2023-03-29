@@ -160,7 +160,7 @@ export const Chat: FC<Props> = memo(
                   href="https://platform.openai.com/account/api-keys"
                   target="_blank"
                   rel="noreferrer"
-                  className="text-blue-500 hover:underline"
+                  className="text-indigo-500 hover:underline"
                 >
                   openai.com
                 </a>
