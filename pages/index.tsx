@@ -30,6 +30,7 @@ import { useEffect, useRef, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { alchemy } from '../script';
 import { useAccount, useConnect, useDisconnect } from 'wagmi';
+import Header from '@/components/Header/Header';
 
 interface HomeProps {
   serverSideApiKeyIsSet: boolean;
@@ -734,10 +735,11 @@ const Home: React.FC<HomeProps> = ({ serverSideApiKeyIsSet }) => {
               onNewConversation={handleNewConversation}
             />
           </div>
+          <Header />
 
-          <div className="flex h-full w-full pt-[48px] sm:pt-0">
+          <div className="sm:pt-022  fixed flex h-full w-full bg-[#030A13] pt-[48px]">
             {true ? (
-              <div>
+              <div className="p-3">
                 <Chatbar
                   loading={messageIsStreaming}
                   conversations={conversations}
@@ -779,7 +781,7 @@ const Home: React.FC<HomeProps> = ({ serverSideApiKeyIsSet }) => {
               </div>
             )}
 
-            <div className="flex flex-1">
+            <div className="flex flex-1 p-3">
               <Chat
                 conversation={selectedConversation}
                 messageIsStreaming={messageIsStreaming}

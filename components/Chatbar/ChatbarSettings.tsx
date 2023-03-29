@@ -34,12 +34,12 @@ export const ChatbarSettings: FC<Props> = ({
 }) => {
   const { t } = useTranslation('sidebar');
   return (
-    <div className="flex flex-col items-center space-y-1 border-t border-white/20 pt-1 text-sm">
+    <div className="flex flex-col items-center space-y-1 border-t border-slate-800 pt-1 text-sm">
       {conversationsCount > 0 ? (
         <ClearConversations onClearConversations={onClearConversations} />
       ) : null}
 
-      <Import onImport={onImportConversations} />
+      {/* <Import onImport={onImportConversations} />
 
       <SidebarButton
         text={t('Export conversations')}
@@ -55,7 +55,7 @@ export const ChatbarSettings: FC<Props> = ({
         onClick={() =>
           onToggleLightMode(lightMode === 'light' ? 'dark' : 'light')
         }
-      />
+      /> */}
 
       <Key apiKey={apiKey} onApiKeyChange={onApiKeyChange} />
     </div>

@@ -75,8 +75,8 @@ export const ChatMessage: FC<Props> = memo(
       <div
         className={`group px-4 ${
           message.role === 'assistant'
-            ? 'border-b border-black/10 bg-gray-50 text-gray-800 dark:border-zinc-800 dark:bg-[#080F18] dark:text-gray-100'
-            : 'border-b border-black/10 bg-white text-gray-800 dark:border-zinc-800 dark:bg-[#030A13] dark:text-gray-100'
+            ? 'border-b border-black/10 bg-gray-50 text-gray-800 dark:border-slate-800 dark:bg-[#0a141f] dark:text-gray-100'
+            : 'border-b border-black/10 bg-white text-gray-800 dark:border-slate-800 dark:bg-[#080F18] dark:text-gray-100'
         }`}
         style={{ overflowWrap: 'anywhere' }}
         onMouseEnter={() => setIsHovering(true)}

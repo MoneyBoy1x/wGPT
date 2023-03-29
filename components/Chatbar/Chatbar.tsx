@@ -15,6 +15,7 @@ import { ChatbarSettings } from './ChatbarSettings';
 import { Conversations } from './Conversations';
 import { useAccount, useConnect, useDisconnect } from 'wagmi';
 import { InjectedConnector } from 'wagmi/connectors/injected';
+import Wallet from '../Wallet/Wallet';
 
 interface Props {
   loading: boolean;
@@ -128,29 +129,13 @@ export const Chatbar: FC<Props> = ({
 
   return (
     <div
-      className={`fixed top-0 bottom-0 z-50 flex h-full w-[260px] flex-none flex-col space-y-2 border-r border-zinc-800 bg-[#080F18] p-2 transition-all sm:relative sm:top-0`}
+      className={`fixed top-0 bottom-0 z-50 flex h-full w-[260px] flex-none flex-col space-y-2 rounded border border-slate-800  bg-[#080F18] py-2 transition-all sm:relative sm:top-0`}
     >
-      <div className="my-2 flex flex-col">
-        {address ? (
-          <button
-            className="rounded-md bg-indigo-600 py-3 px-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-            onClick={() => disconnect()}
-          >
-            Disconnect Wallet
-          </button>
-        ) : (
-          <button
-            className="rounded-md bg-indigo-600 py-3 px-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-            onClick={() => connect()}
-          >
-            Connect Wallet
-          </button>
-        )}
-      </div>
+      {/* <Wallet /> */}
 
-      <div className="flex items-center">
+      <div className="flex items-center px-2">
         <button
-          className="flex w-[190px] flex-shrink-0 cursor-pointer select-none items-center gap-3 rounded-md border border-white/20 p-3 text-[14px] leading-normal text-white transition-colors duration-200 hover:bg-gray-500/10"
+          className="flex w-[190px] flex-shrink-0 cursor-pointer select-none items-center gap-3 rounded-md border border-slate-800 p-3 text-[14px] leading-normal text-white transition-colors duration-200 hover:bg-gray-500/10"
           onClick={() => {
             onNewConversation();
             setSearchTerm('');
@@ -160,7 +145,7 @@ export const Chatbar: FC<Props> = ({
           {t('New chat')}
         </button>
         <button
-          className="ml-2 flex flex-shrink-0 cursor-pointer items-center gap-3 rounded-md border border-white/20 p-3 text-[14px] leading-normal text-white transition-colors duration-200 hover:bg-gray-500/10"
+          className="ml-2 flex flex-shrink-0 cursor-pointer items-center gap-3 rounded-md border border-slate-800 p-3 text-[14px] leading-normal text-white transition-colors duration-200 hover:bg-gray-500/10"
           onClick={() => onCreateFolder(t('New folder'))}
         >
           <IconFolderPlus size={18} />
@@ -180,7 +165,7 @@ export const Chatbar: FC<Props> = ({
         />
       )}
 
-      <div className="flex-grow overflow-auto">
+      <div className="flex-grow overflow-auto px-2">
         {folders.length > 0 && (
           <div className="flex border-b border-white/20 pb-2">
             <ChatFolders
@@ -242,3 +227,23 @@ export const Chatbar: FC<Props> = ({
     </div>
   );
 };
+
+{
+  /* <div className="my-2 flex flex-col">
+        {address ? (
+          <button
+            className="rounded-md bg-indigo-600 py-3 px-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+            onClick={() => disconnect()}
+          >
+            Disconnect Wallet
+          </button>
+        ) : (
+          <button
+            className="rounded-md bg-indigo-600 py-3 px-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+            onClick={() => connect()}
+          >
+            Connect Wallet
+          </button>
+        )}
+      </div> */
+}

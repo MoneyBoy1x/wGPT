@@ -8,6 +8,8 @@ import {
   IconX,
 } from '@tabler/icons-react';
 import { DragEvent, FC, KeyboardEvent, useEffect, useState } from 'react';
+import { BsChatLeft, BsChat } from 'react-icons/bs';
+import { BiPencil, BiTrash } from 'react-icons/bi';
 
 interface Props {
   selectedConversation: Conversation;
@@ -85,7 +87,7 @@ export const ConversationComponent: FC<Props> = ({
             loading ? 'disabled:cursor-not-allowed' : ''
           } ${
             selectedConversation.id === conversation.id
-              ? 'border border-zinc-800 bg-[#101A27] text-white'
+              ? 'border border-slate-800 bg-[#101A27] text-white'
               : ''
           }`}
           onClick={() => onSelectConversation(conversation)}
@@ -93,7 +95,7 @@ export const ConversationComponent: FC<Props> = ({
           draggable="true"
           onDragStart={(e) => handleDragStart(e, conversation)}
         >
-          <IconMessage size={18} />
+          <BsChat />
           <div
             className={`relative max-h-5 flex-1 overflow-hidden text-ellipsis whitespace-nowrap break-all text-left text-[12.5px] leading-3 ${
               selectedConversation.id === conversation.id ? 'pr-12' : 'pr-1'
@@ -140,23 +142,23 @@ export const ConversationComponent: FC<Props> = ({
         !isRenaming && (
           <div className="visible absolute right-1 z-10 flex text-gray-300">
             <button
-              className="min-w-[20px] p-1 text-neutral-400 hover:text-neutral-100"
+              className="min-w-[20px] p-1 text-neutral-200 hover:text-neutral-100"
               onClick={(e) => {
                 e.stopPropagation();
                 setIsRenaming(true);
                 setRenameValue(selectedConversation.name);
               }}
             >
-              <IconPencil size={18} />
+              <BiPencil />
             </button>
             <button
-              className="min-w-[20px] p-1 text-neutral-400 hover:text-neutral-100"
+              className="min-w-[20px] p-1 text-neutral-200 hover:text-neutral-100"
               onClick={(e) => {
                 e.stopPropagation();
                 setIsDeleting(true);
               }}
             >
-              <IconTrash size={18} />
+              <BiTrash />
             </button>
           </div>
         )}

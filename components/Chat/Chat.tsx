@@ -137,7 +137,7 @@ export const Chat: FC<Props> = memo(
     }, [messagesEndRef]);
 
     return (
-      <div className="overflow-none relative flex-1 bg-white dark:bg-[#030A13]">
+      <div className="overflow-none relative flex-1 overflow-hidden rounded border border-slate-800 bg-white dark:bg-[#080F18]">
         {!(apiKey || serverSideApiKeyIsSet) ? (
           <div className="mx-auto flex h-full w-[300px] flex-col justify-center space-y-6 sm:w-[500px]">
             <div className="mx-auto mb-5 text-gray-800 dark:text-gray-100">
@@ -178,13 +178,13 @@ export const Chat: FC<Props> = memo(
               {conversation.messages.length === 0 ? (
                 <>
                   <div className="mx-auto flex w-[350px] flex-col space-y-10 pt-12 sm:w-[600px]">
-                    <div className="text-center text-3xl font-semibold text-gray-800 dark:text-gray-100">
+                    <div className="text-center text-3xl font-bold  tracking-wider text-gray-800 dark:text-gray-100">
                       {models.length === 0 ? (
                         <div>
                           <Spinner size="16px" className="mx-auto" />
                         </div>
                       ) : (
-                        'WalletGPT'
+                        'CryptoGPT'
                       )}
                     </div>
 
@@ -217,8 +217,9 @@ export const Chat: FC<Props> = memo(
                 </>
               ) : (
                 <>
-                  <div className="flex justify-center border border-b-neutral-300 bg-neutral-100 py-2 text-sm text-neutral-500 dark:border-zinc-800 dark:bg-[#030A13] dark:text-neutral-200">
-                    {t('Model')}: {conversation.model.name}
+                  <div className="full absolute z-10 flex h-14 w-full items-center border-b border-b-neutral-300  bg-neutral-100 px-2 py-2  text-xs font-bold tracking-widest text-neutral-600 backdrop-blur-sm dark:border-slate-800 dark:bg-[#0a141f]/50 dark:text-neutral-300">
+                    <div className="mr-2 h-4 w-4 overflow-hidden rounded-full border-4  border-blue-600 shadow-xl"></div>
+                    {conversation.model.name}
                     <IconSettings
                       className="ml-2 cursor-pointer hover:opacity-50"
                       onClick={handleSettings}
@@ -230,36 +231,38 @@ export const Chat: FC<Props> = memo(
                       size={18}
                     />
                   </div>
-                  {showSettings && (
-                    <div className="flex flex-col space-y-10 md:mx-auto md:max-w-xl md:gap-6 md:py-3 md:pt-6 lg:max-w-2xl lg:px-0 xl:max-w-3xl">
-                      <div className="flex h-full flex-col space-y-4 border-b border-neutral-200 p-4 dark:border-neutral-600 md:rounded-lg md:border">
-                        <ModelSelect
-                          model={conversation.model}
-                          models={models}
-                          onModelChange={(model) =>
-                            onUpdateConversation(conversation, {
-                              key: 'model',
-                              value: model,
-                            })
-                          }
-                        />
+                  <div className="mt-10">
+                    {showSettings && (
+                      <div className="flex flex-col space-y-10 md:mx-auto md:max-w-xl md:gap-6 md:py-3 md:pt-6 lg:max-w-2xl lg:px-0 xl:max-w-3xl">
+                        <div className="flex h-full flex-col space-y-4 border-b border-neutral-200 p-4 dark:border-neutral-600 md:rounded-lg md:border">
+                          <ModelSelect
+                            model={conversation.model}
+                            models={models}
+                            onModelChange={(model) =>
+                              onUpdateConversation(conversation, {
+                                key: 'model',
+                                value: model,
+                              })
+                            }
+                          />
+                        </div>
                       </div>
-                    </div>
-                  )}
+                    )}
 
-                  {conversation.messages.map((message, index) => (
-                    <ChatMessage
-                      key={index}
-                      message={message}
-                      messageIndex={index}
-                      onEditMessage={onEditMessage}
-                    />
-                  ))}
+                    {conversation.messages.map((message, index) => (
+                      <ChatMessage
+                        key={index}
+                        message={message}
+                        messageIndex={index}
+                        onEditMessage={onEditMessage}
+                      />
+                    ))}
+                  </div>
 
                   {loading && <ChatLoader />}
 
                   <div
-                    className="h-[162px] bg-white dark:bg-[#030A13]"
+                    className="h-[162px] bg-white dark:bg-[#080F18] "
                     ref={messagesEndRef}
                   />
                 </>

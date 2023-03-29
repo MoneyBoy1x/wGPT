@@ -11,7 +11,7 @@ interface Props {
 export const ModelSelect: FC<Props> = ({ model, models, onModelChange }) => {
   const { t } = useTranslation('chat');
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col bg-[#080F18]">
       <label className="mb-2 text-left text-neutral-700 dark:text-neutral-400">
         {t('Model')}
       </label>
