@@ -281,7 +281,7 @@ export const ChatInput: FC<Props> = ({
           />
 
           <button
-            className="absolute right-3 rounded-sm p-1 text-slate-800 hover:bg-neutral-200 hover:text-neutral-900 focus:outline-none dark:bg-opacity-50 dark:text-indigo-300 dark:hover:text-neutral-200"
+            className="absolute right-3 rounded-sm p-1 text-slate-800 hover:bg-neutral-200 hover:text-neutral-900 focus:outline-none dark:bg-opacity-50 dark:text-blue-300 dark:hover:text-neutral-200"
             onClick={handleSend}
           >
             <IconSend size={16} className="opacity-90" />

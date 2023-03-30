@@ -133,14 +133,14 @@ export const Sidebar: FC<Props> = ({
       <div className="my-2 flex flex-col">
         {address ? (
           <button
-            className="rounded-md bg-indigo-600 py-3 px-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+            className="rounded-md bg-blue-600 py-3 px-2.5 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
             onClick={() => disconnect()}
           >
             Disconnect Wallet
           </button>
         ) : (
           <button
-            className="rounded-md bg-indigo-600 py-3 px-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+            className="rounded-md bg-blue-600 py-3 px-2.5 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
             onClick={() => connect()}
           >
             Connect Wallet

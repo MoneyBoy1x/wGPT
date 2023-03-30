@@ -586,8 +586,8 @@ const Home: React.FC<HomeProps> = ({ serverSideApiKeyIsSet }) => {
 
     const newPrompt: Prompt = {
       id: uuidv4(),
-      name: `Prompt ${prompts.length + 1}`,
-      description: '',
+      name: `Plugin ${prompts.length + 1}`,
+      description: 'dApp',
       content: '',
       model: OpenAIModels[OpenAIModelID.GPT_3_5],
       folderId: null,
@@ -737,9 +737,9 @@ const Home: React.FC<HomeProps> = ({ serverSideApiKeyIsSet }) => {
           </div>
           <Header />
 
-          <div className="sm:pt-022  fixed flex h-full w-full bg-[#030A13] pt-[48px]">
+          <div className=" fixed flex h-full w-full bg-[#030A13] pt-[48px]">
             {true ? (
-              <div className="p-3">
+              <div className="px-3 py-5">
                 <Chatbar
                   loading={messageIsStreaming}
                   conversations={conversations}
@@ -781,7 +781,7 @@ const Home: React.FC<HomeProps> = ({ serverSideApiKeyIsSet }) => {
               </div>
             )}
 
-            <div className="flex flex-1 p-3">
+            <div className="flex flex-1 px-1 py-5">
               <Chat
                 conversation={selectedConversation}
                 messageIsStreaming={messageIsStreaming}
@@ -798,9 +798,8 @@ const Home: React.FC<HomeProps> = ({ serverSideApiKeyIsSet }) => {
                 address={address}
               />
             </div>
-
-            {false ? (
-              <div>
+            {true ? (
+              <div className="px-3 py-5 ">
                 <Promptbar
                   prompts={prompts}
                   folders={folders}

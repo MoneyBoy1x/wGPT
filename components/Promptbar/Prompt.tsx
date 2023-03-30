@@ -6,6 +6,7 @@ import {
   IconX,
 } from '@tabler/icons-react';
 import { DragEvent, FC, useEffect, useState } from 'react';
+import { BsCircle } from 'react-icons/bs';
 import { PromptModal } from './PromptModal';
 
 interface Props {
@@ -41,7 +42,7 @@ export const PromptComponent: FC<Props> = ({
   return (
     <>
       <button
-        className="text-sidebar flex w-full cursor-pointer items-center gap-3 rounded-lg p-3 text-[14px] transition-colors duration-200 hover:bg-[#343541]/90"
+        className="text-sidebar my-0.5 flex h-14 cursor-pointer items-center gap-3 rounded-xl border border-slate-800 p-3 text-[14px] transition-colors duration-200 hover:bg-[#343541]/90"
         draggable="true"
         onClick={(e) => {
           e.stopPropagation();
@@ -54,7 +55,9 @@ export const PromptComponent: FC<Props> = ({
           setRenameValue('');
         }}
       >
-        <IconBulbFilled size={16} />
+        <div>
+          <BsCircle className="text-blue-500" />
+        </div>
 
         {isRenaming ? (
           <input
@@ -111,13 +114,13 @@ export const PromptComponent: FC<Props> = ({
         )}
       </button>
 
-      {showModal && (
+      {/* {showModal && (
         <PromptModal
           prompt={prompt}
           onClose={() => setShowModal(false)}
           onUpdatePrompt={onUpdatePrompt}
         />
-      )}
+      )} */}
     </>
   );
 };

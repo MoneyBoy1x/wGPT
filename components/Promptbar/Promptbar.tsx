@@ -96,22 +96,22 @@ export const Promptbar: FC<Props> = ({
 
   return (
     <div
-      className={`fixed top-0 bottom-0 z-50 flex h-full w-[260px] flex-none flex-col space-y-2 bg-[#202123] p-2 text-[14px] transition-all sm:relative sm:top-0`}
+      className={`fixed  top-0 bottom-0 z-50  flex h-full  w-[260px] flex-none flex-col space-y-2 rounded border border-slate-800 p-2 py-2 text-[14px] transition-all dark:bg-[#080F18] sm:relative sm:top-0`}
     >
       <div className="flex items-center">
         <button
-          className="text-sidebar flex w-[190px] flex-shrink-0 cursor-pointer select-none items-center gap-3 rounded-md border border-white/20 p-3 text-white transition-colors duration-200 hover:bg-gray-500/10"
+          className="text-sidebar flex w-[190px] flex-shrink-0 cursor-pointer select-none items-center gap-3 rounded-md border border-slate-800 p-3 text-white transition-colors duration-200 hover:bg-gray-500/10"
           onClick={() => {
             onCreatePrompt();
             setSearchTerm('');
           }}
         >
           <IconPlus size={16} />
-          {t('New prompt')}
+          {t('Plugins')}
         </button>
 
         <button
-          className="ml-2 flex flex-shrink-0 cursor-pointer items-center gap-3 rounded-md border border-white/20 p-3 text-sm text-white transition-colors duration-200 hover:bg-gray-500/10"
+          className="ml-2 flex flex-shrink-0 cursor-pointer items-center gap-3 rounded-md border border-slate-800 p-3 text-sm text-white transition-colors duration-200 hover:bg-gray-500/10"
           onClick={() => onCreateFolder(t('New folder'))}
         >
           <IconFolderPlus size={16} />
@@ -126,14 +126,14 @@ export const Promptbar: FC<Props> = ({
 
       {prompts.length > 1 && (
         <Search
-          placeholder="Search prompts..."
+          placeholder="Search plugins..."
           searchTerm={searchTerm}
           onSearch={setSearchTerm}
         />
       )}
 
       <div className="flex-grow overflow-auto">
-        {folders.length > 0 && (
+        {/* {folders.length > 0 && (
           <div className="flex border-b border-white/20 pb-2">
             <PromptFolders
               searchTerm={searchTerm}
@@ -146,7 +146,7 @@ export const Promptbar: FC<Props> = ({
               onUpdatePrompt={handleUpdatePrompt}
             />
           </div>
-        )}
+        )} */}
 
         {prompts.length > 0 ? (
           <div
@@ -164,7 +164,7 @@ export const Promptbar: FC<Props> = ({
           </div>
         ) : (
           <div className="mt-4 text-center text-white">
-            <div>{t('No prompts.')}</div>
+            <div>{t('No Plugins')}</div>
           </div>
         )}
       </div>

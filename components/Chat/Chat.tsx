@@ -160,7 +160,7 @@ export const Chat: FC<Props> = memo(
                   href="https://platform.openai.com/account/api-keys"
                   target="_blank"
                   rel="noreferrer"
-                  className="text-indigo-500 hover:underline"
+                  className="text-blue-500 hover:underline"
                 >
                   openai.com
                 </a>
@@ -178,7 +178,7 @@ export const Chat: FC<Props> = memo(
               {conversation.messages.length === 0 ? (
                 <>
                   <div className="mx-auto flex w-[350px] flex-col space-y-10 pt-12 sm:w-[600px]">
-                    <div className="text-center text-3xl font-bold  tracking-wider text-gray-800 dark:text-gray-100">
+                    <div className="text-center text-3xl font-bold  tracking-wider text-gray-800 dark:text-blue-500">
                       {models.length === 0 ? (
                         <div>
                           <Spinner size="16px" className="mx-auto" />
@@ -189,7 +189,7 @@ export const Chat: FC<Props> = memo(
                     </div>
 
                     {models.length > 0 && (
-                      <div className="flex h-full flex-col space-y-4 rounded-lg border border-neutral-200 p-4 dark:border-neutral-600">
+                      <div className="flex h-full flex-col space-y-4 rounded-lg border border-neutral-200 p-4 dark:border-slate-800">
                         <ModelSelect
                           model={conversation.model}
                           models={models}
@@ -231,7 +231,7 @@ export const Chat: FC<Props> = memo(
                       size={18}
                     />
                   </div>
-                  <div className="mt-10">
+                  <div className="mt-14">
                     {showSettings && (
                       <div className="flex flex-col space-y-10 md:mx-auto md:max-w-xl md:gap-6 md:py-3 md:pt-6 lg:max-w-2xl lg:px-0 xl:max-w-3xl">
                         <div className="flex h-full flex-col space-y-4 border-b border-neutral-200 p-4 dark:border-neutral-600 md:rounded-lg md:border">

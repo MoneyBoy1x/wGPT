@@ -157,16 +157,18 @@ export const Chatbar: FC<Props> = ({
         />
       </div>
 
-      {conversations.length > 1 && (
-        <Search
-          placeholder="Search conversations..."
-          searchTerm={searchTerm}
-          onSearch={setSearchTerm}
-        />
-      )}
+      <div className="mx-2">
+        {conversations.length > 1 && (
+          <Search
+            placeholder="Search conversations..."
+            searchTerm={searchTerm}
+            onSearch={setSearchTerm}
+          />
+        )}
+      </div>
 
       <div className="flex-grow overflow-auto px-2">
-        {folders.length > 0 && (
+        {/* {folders.length > 0 && (
           <div className="flex border-b border-white/20 pb-2">
             <ChatFolders
               searchTerm={searchTerm}
@@ -183,7 +185,7 @@ export const Chatbar: FC<Props> = ({
               onUpdateConversation={handleUpdateConversation}
             />
           </div>
-        )}
+        )} */}
 
         {conversations.length > 0 ? (
           <div
@@ -232,14 +234,14 @@ export const Chatbar: FC<Props> = ({
   /* <div className="my-2 flex flex-col">
         {address ? (
           <button
-            className="rounded-md bg-indigo-600 py-3 px-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+            className="rounded-md bg-blue-600 py-3 px-2.5 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
             onClick={() => disconnect()}
           >
             Disconnect Wallet
           </button>
         ) : (
           <button
-            className="rounded-md bg-indigo-600 py-3 px-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+            className="rounded-md bg-blue-600 py-3 px-2.5 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
             onClick={() => connect()}
           >
             Connect Wallet

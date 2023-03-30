@@ -15,13 +15,12 @@ export default function Header({}: Props) {
   });
   const { disconnect } = useDisconnect();
   return (
-    <div className="overflow-none z-10 flex items-center  justify-between   bg-[#030A13] px-3">
+    <div className="overflow-none z-10 flex items-center  justify-between border-b border-slate-800   bg-[#071018] px-3">
       <Logo className="" />
-
       <div className="flex flex-col">
         {address ? (
           <button
-            className="flex-start flex items-center space-x-2 rounded bg-slate-800  py-0.5 px-2 text-xs text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+            className="flex-start flex items-center space-x-2 rounded border border-slate-800 bg-[#101A27]  py-0.5 px-2 text-xs text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
             onClick={() => disconnect()}
           >
             <IoMdWallet className="font-bod  h-6 w-6  rounded-full border border-white p-1 text-gray-200" />{' '}
@@ -36,7 +35,7 @@ export default function Header({}: Props) {
           </button>
         ) : (
           <button
-            className="rounded bg-indigo-600 py-3 px-2.5 text-sm font-medium text-black shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+            className="rounded bg-[#101A27] py-3 px-2.5 text-sm font-medium text-black shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
             onClick={() => connect()}
           >
             Connect Wallet
